@@ -1,0 +1,116 @@
+:root {
+  --bg-start: #e6f7ff;
+  --bg-end: #e0f2fe;
+  --primary: #0077b6;
+  --accent: #00b4d8;
+  --muted: #6c757d;
+  --card-bg: #ffffff;
+  --table-header: #f1f9ff;
+  --table-row-alt: #fbfdff;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+  color: #04263a;
+}
+
+.container {
+  max-width: 960px;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #fff;
+}
+
+.logo-sm {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary);
+}
+
+/* Links */
+a {
+  color: var(--accent);
+}
+
+/* Navbar */
+.navbar.bg-primary {
+  background: linear-gradient(90deg, var(--primary), #005f8a) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(180deg,var(--primary), #005f8a);
+  border: 0;
+}
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: rgba(0,119,182,0.25);
+}
+
+/* App specific overrides and helpers for Bootstrap components */
+.app-header {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.lead {
+  font-size: 1.05rem;
+}
+
+.card-custom {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border: 0;
+}
+
+.table-fixed thead th {
+  position: sticky;
+  top: 0;
+  background: var(--table-header);
+  z-index: 1;
+  color: #04263a;
+}
+
+/* Table styles */
+.table {
+  background: transparent;
+}
+.table thead th {
+  border-bottom: 2px solid rgba(0,0,0,0.04);
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: var(--table-row-alt);
+}
+.table-hover>tbody>tr:hover {
+  background-color: rgba(0,183,255,0.06);
+}
+
+.data-table th,
+.data-table td {
+  vertical-align: middle;
+}
+
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1040;
+}
+
+.modal-custom {
+  z-index: 1050;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .container { padding-left: 1rem; padding-right: 1rem; }
+}
