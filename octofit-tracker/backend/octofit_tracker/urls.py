@@ -13,8 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework.routers import DefaultRouter
 from . import views
 
@@ -25,8 +29,30 @@ router.register(r'activities', views.ActivityViewSet)
 router.register(r'workouts', views.WorkoutViewSet)
 router.register(r'leaderboards', views.LeaderboardViewSet)
 
+
+def get_api_base_url(request):
+    codespace_name = os.environ.get('CODESPACE_NAME')
+    if codespace_name:
+        return f'https://{codespace_name}-8000.app.github.dev/api'
+    scheme = request.scheme or 'http'
+    host = request.get_host()
+    return f'{scheme}://{host}/api'
+
+
+@api_view(['GET'])
+def codespace_api_root(request, format=None):
+    base_url = get_api_base_url(request)
+    return Response({
+        'users': f'{base_url}/users/',
+        'teams': f'{base_url}/teams/',
+        'activities': f'{base_url}/activities/',
+        'workouts': f'{base_url}/workouts/',
+        'leaderboards': f'{base_url}/leaderboards/',
+    })
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.api_root, name='api-root'),
-    path('', include(router.urls)),
+    path('api/', codespace_api_root, name='api-root'),
+    path('api/', include(router.urls)),
 ]
